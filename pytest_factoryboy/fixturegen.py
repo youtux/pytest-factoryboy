@@ -75,7 +75,11 @@ def usefixtures(*fixtures: str) -> Callable[[Callable[P, T]], Callable[P, T]]:
         else:
             insert_pos = len(function_params)
 
-        params = function_params[0:insert_pos] + use_fixtures_params + function_params[insert_pos:]
+        params = (
+            function_params[:insert_pos]
+            + use_fixtures_params
+            + function_params[insert_pos:]
+        )
 
         @functools.wraps(fixture_function)
         def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:

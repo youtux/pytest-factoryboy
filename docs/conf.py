@@ -1,4 +1,5 @@
 """Sphinx config."""
+
 #
 # pytest-factoryboy documentation build configuration file, created by
 # sphinx-quickstart on Sun Apr  7 21:07:56 2013.
@@ -46,7 +47,7 @@ master_doc = "index"
 # General information about the project.
 project = "pytest-factoryboy"
 AUTHOR = "Oleg Pidsadnyi, Anatoly Bubenkov and others"
-copyright = "2015, " + AUTHOR
+copyright = f"2015, {AUTHOR}"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
