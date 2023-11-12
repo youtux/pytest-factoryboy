@@ -63,7 +63,7 @@ class TestRegisterAlternativeName:
 
     def test_register(self, request, second_foo: Foo):
         """Test that `register` invoked with a specific `_name` registers the fixture under that `_name`."""
-        assert second_foo.value == None
+        assert second_foo.value is None
 
         with pytest.raises(FixtureLookupError) as exc:
             request.getfixturevalue("foo")

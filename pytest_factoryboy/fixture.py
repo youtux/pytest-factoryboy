@@ -218,8 +218,7 @@ def make_declaration_fixturedef(
         if isinstance(value, factory.RelatedFactory):
             related_model = get_model_name(subfactory_class)
             args.append(related_model)
-            related.append(related_model)
-            related.append(attr_name)
+            related.extend((related_model, attr_name))
             related.extend(subfactory_deps)
 
         if isinstance(value, factory.SubFactory):
@@ -531,8 +530,7 @@ class LazyFixture(Generic[T]):
         :param request: pytest request object.
         :return: evaluated fixture.
         """
-        if callable(self.fixture):
-            kwargs = {arg: request.getfixturevalue(arg) for arg in self.args}
-            return self.fixture(**kwargs)
-        else:
+        if not callable(self.fixture):
             return cast(T, request.getfixturevalue(self.fixture))
+        kwargs = {arg: request.getfixturevalue(arg) for arg in self.args}
+        return self.fixture(**kwargs)
